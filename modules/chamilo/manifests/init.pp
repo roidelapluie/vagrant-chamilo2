@@ -1,4 +1,8 @@
 class chamilo ($version = 'stable'){
+  if ($version == 'dev'){
+    $folder = 'chamilo-dev'
+    $get = 'get-all-dev'
+  }
   if ($version == 'stable'){
     $folder = 'chamilo'
     $get = 'get-all'
@@ -34,6 +38,6 @@ class chamilo ($version = 'stable'){
       require => [Package['php'], Exec['clone-chamilo']],
       timeout => 0,
   }
-  php::module { ['gd', 'xml', 'mbstring']: }
+  php::module { ['gd', 'xml', 'mbstring', 'mysql']: }
   php::option {'output_buffering': ensure => 'off'; }
 }

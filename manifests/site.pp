@@ -1,8 +1,7 @@
-node chamilo2-stable {
+node chamilo2 {
   include apache
   include mercurial
   include site
-  include chamilo
   include php
   class { 'mysql':
       rootpass => 'sup3rR00t',
@@ -14,5 +13,15 @@ node chamilo2-stable {
   mysql::definitions::db {
     'chamdb':
       user => 'chamuser',
+  }
+}
+node chamilo2-stable inherits chamilo2 {
+  include chamilo
+}
+
+node chamilo2-dev inherits chamilo2 {
+  class {
+    'chamilo':
+      version => 'dev',
   }
 }
